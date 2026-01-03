@@ -1375,9 +1375,106 @@
         .panel.is-active{
             flex: 1 !important;
         }
+/* --- HERO FIX (DESKTOP ONLY): keep hero text inside margins --- */
+@media (min-width: 901px){
 
-    </style>
+  .hero-text-layer{
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+
+  .text-top{
+    margin-left: 0 !important;
+  }
+
+  .text-bottom{
+    margin-right: 0 !important;
+  }
+
+  .hero-section{
+    overflow-x: clip;
+  }
+/* --- DESKTOP: stop clipping the right glow/stroke on HERO text --- */
+@media (min-width: 901px){
+  .hero-section{
+    padding-right: 80px !important;  /* aumenta respiro do hero inteiro */
+    padding-left: 80px !important;   /* mantém equilíbrio visual */
+  }
+
+  /* garante que o bloco da direita respeite o padding do hero */
+  .text-bottom{
+    margin-right: 0 !important;
+  }
+}
+    /* --- CTA buttons spacing: WhatsApp vs Instagram --- */
+.cta-buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px; /* aumenta o espaço entre os botões */
+}
+
+.cta-btn,
+.cta-btn-instagram{
+  margin: 0 !important;
+}
+/* --- Header blur ribbon on scroll (only after leaving hero) --- */
+header{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 2000;
+}
+
+/* cria a fita por trás */
+header::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+
+/* ativa quando scrolla */
+header.is-scrolled::before{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* garante que logo/burger fiquem acima da fita */
+header > *{
+  position: relative;
+  z-index: 1;
+}
+</style>
 </head>
+<script>
+  (function(){
+    const header = document.querySelector('header');
+    if(!header) return;
+
+    // ativa a fita assim que sair do topo (ou ajusta o threshold se quiser)
+    const threshold = 30;
+
+    const onScroll = () => {
+      if (window.scrollY > threshold) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
 <body>
 
     <!-- HEADER -->
