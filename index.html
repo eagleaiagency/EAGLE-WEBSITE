@@ -1377,7 +1377,6 @@
         }
 /* --- HERO FIX (DESKTOP ONLY): keep hero text inside margins --- */
 @media (min-width: 901px){
-
   .hero-text-layer{
     width: 100%;
     max-width: 1400px;
@@ -1385,47 +1384,32 @@
     padding-left: 50px;
     padding-right: 50px;
   }
+  .text-top{ margin-left: 0 !important; }
+  .text-bottom{ margin-right: 0 !important; }
 
-  .text-top{
-    margin-left: 0 !important;
-  }
-
-  .text-bottom{
-    margin-right: 0 !important;
-  }
-
+  /* stop clipping right glow/stroke on hero text */
   .hero-section{
+    padding-left: 80px !important;
+    padding-right: 80px !important;
     overflow-x: clip;
   }
-/* --- DESKTOP: stop clipping the right glow/stroke on HERO text --- */
-@media (min-width: 901px){
-  .hero-section{
-    padding-right: 80px !important;  /* aumenta respiro do hero inteiro */
-    padding-left: 80px !important;   /* mantém equilíbrio visual */
-  }
-
-  /* garante que o bloco da direita respeite o padding do hero */
-  .text-bottom{
-    margin-right: 0 !important;
-  }
 }
-    /* --- CTA buttons spacing: WhatsApp vs Instagram --- */
+
+/* --- CTA buttons spacing: WhatsApp vs Instagram --- */
 .cta-buttons{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px; /* aumenta o espaço entre os botões */
+  gap: 18px;
 }
-
 .cta-btn,
 .cta-btn-instagram{
   margin: 0 !important;
 }
-/* --- MOBILE: disable What We Do hover/auto effects; keep images colored --- */
-@media (max-width: 900px){
 
-  /* garante que nada "expande" ou muda de tamanho */
-  .services-wrapper { transition: none !important; }
+/* --- MOBILE: WHAT WE DO (Services) - no effects; keep images colored --- */
+@media (max-width: 900px){
+  .services-wrapper{ transition: none !important; }
   .services-wrapper:hover .panel:not(:hover){ filter: none !important; }
 
   .panel{
@@ -1433,7 +1417,6 @@
     flex: 1 !important;
   }
 
-  /* imagens sempre coloridas, sem zoom e sem animação */
   .panel-img{
     filter: none !important;
     transform: none !important;
@@ -1441,14 +1424,12 @@
     object-fit: cover !important;
   }
 
-  /* remove qualquer estado ativo/hover que tente mudar algo */
   .panel:hover .panel-img,
   .panel.is-active .panel-img{
     filter: none !important;
     transform: none !important;
   }
 
-  /* mantém textos sem “sumir/aparecer” */
   .service-name{
     opacity: 1 !important;
     transform: none !important;
@@ -1458,6 +1439,44 @@
     opacity: 1 !important;
     transition: none !important;
   }
+}
+
+/* --- HEADER: blur ribbon appears after scroll; transparent on hero --- */
+header{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 2000;
+}
+
+/* blur ribbon behind header items */
+header::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.38);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity .25s ease, transform .25s ease;
+  pointer-events: none;
+}
+
+/* when scrolled, show ribbon and make header readable */
+header.is-scrolled{
+  mix-blend-mode: normal;
+}
+header.is-scrolled::before{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ensure header content above ribbon */
+header > *{
+  position: relative;
+  z-index: 1;
 }
 </style>
 </head>
@@ -1820,66 +1839,6 @@
             });
         })();
 
-        
-        // --- SERVICES (WHAT WE DO) mobile: auto-reveal panels on scroll ---
-        (function(){
-            const isMobile = window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
-            if(!isMobile) return;
-
-            const section = document.getElementById("services");
-            const panels = Array.from(section ? section.querySelectorAll(".panel") : []);
-            if(!section || panels.length < 2) return;
-
-            let idx = 0;
-            let timer = null;
-
-            function activate(i){
-                panels.forEach((p, k) => p.classList.toggle("is-active", k === i));
-            }
-
-            function startCycle(){
-                if(timer) return;
-                activate(idx);
-                timer = setInterval(() => {
-                    idx = (idx + 1) % panels.length;
-                    activate(idx);
-                }, 1600);
-            }
-
-            function stopCycle(){
-                if(timer){
-                    clearInterval(timer);
-                    timer = null;
-                }
-                panels.forEach(p => p.classList.remove("is-active"));
-            }
-
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if(e.isIntersecting){
-                        startCycle();
-                    } else {
-                        stopCycle();
-                    }
-                });
-            }, { threshold: 0.35 });
-
-            io.observe(section);
-
-            // Optional: allow tap to pause/cycle manually (still intuitive)
-            panels.forEach((p, k) => {
-                p.addEventListener("click", () => {
-                    idx = k;
-                    activate(idx);
-                    // pause briefly so user can read
-                    if(timer){
-                        clearInterval(timer);
-                        timer = null;
-                        setTimeout(() => startCycle(), 2200);
-                    }
-                }, { passive: true });
-            });
-        })();
 
 
         // --- HERO LIQUID BACKGROUND (Canvas 2D, no frameworks) ---
@@ -2067,6 +2026,20 @@
 
         // Init the testimonial canvas
         initLiquidBackground("testimonialCanvas");
+    
+        // --- HEADER: blur ribbon on scroll ---
+        (function(){
+            const header = document.querySelector('header');
+            if(!header) return;
+            const threshold = 30;
+            function onScroll(){
+                if(window.scrollY > threshold) header.classList.add('is-scrolled');
+                else header.classList.remove('is-scrolled');
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
     </script>
 </body>
 </html>
