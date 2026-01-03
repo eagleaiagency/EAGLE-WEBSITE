@@ -1421,70 +1421,46 @@
 .cta-btn-instagram{
   margin: 0 !important;
 }
-/* --- Mobile: only the active panel becomes colored --- */
+/* --- MOBILE: disable What We Do hover/auto effects; keep images colored --- */
 @media (max-width: 900px){
-  .panel .panel-img{
-    filter: brightness(0.6) grayscale(1);
-    transition: filter 0.55s ease;
+
+  /* garante que nada "expande" ou muda de tamanho */
+  .services-wrapper { transition: none !important; }
+  .services-wrapper:hover .panel:not(:hover){ filter: none !important; }
+
+  .panel{
+    transition: none !important;
+    flex: 1 !important;
   }
 
+  /* imagens sempre coloridas, sem zoom e sem animação */
+  .panel-img{
+    filter: none !important;
+    transform: none !important;
+    transition: none !important;
+    object-fit: cover !important;
+  }
+
+  /* remove qualquer estado ativo/hover que tente mudar algo */
+  .panel:hover .panel-img,
   .panel.is-active .panel-img{
-    filter: brightness(1) grayscale(0);
+    filter: none !important;
+    transform: none !important;
+  }
+
+  /* mantém textos sem “sumir/aparecer” */
+  .service-name{
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .service-id{
+    opacity: 1 !important;
+    transition: none !important;
   }
 }
 </style>
 </head>
-<script>
-<script>
-(function () {
-  const panels = Array.from(document.querySelectorAll('.services-wrapper .panel'));
-  if (!panels.length) return;
-
-  // Só no mobile
-  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
-
-  let io = null;
-
-  function activatePanel(panel) {
-    panels.forEach(p => p.classList.remove('is-active'));
-    panel.classList.add('is-active');
-  }
-
-  function setup() {
-    // limpa observer anterior
-    if (io) io.disconnect();
-
-    // se não for mobile, remove is-active pra não interferir no desktop hover
-    if (!isMobile()) {
-      panels.forEach(p => p.classList.remove('is-active'));
-      return;
-    }
-
-    // Observer: ativa o painel que estiver mais "central" na tela
-    io = new IntersectionObserver((entries) => {
-      // pega candidatos visíveis
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-      if (visible.length) activatePanel(visible[0].target);
-    }, {
-      root: null,
-      // Centraliza o "gatilho": só considera ativo quando estiver no miolo da tela
-      rootMargin: '-35% 0px -35% 0px',
-      threshold: [0.2, 0.35, 0.5, 0.65, 0.8]
-    });
-
-    panels.forEach(p => io.observe(p));
-
-    // ativa o primeiro por default (pra não ficar tudo morto no começo)
-    activatePanel(panels[0]);
-  }
-
-  window.addEventListener('resize', setup);
-  setup();
-})();
-</script>
 <body>
 
     <!-- HEADER -->
