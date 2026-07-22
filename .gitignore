@@ -1,0 +1,5 @@
+# AI generation working files (large, not part of the site)
+human-output/
+
+# Local editor/agent config
+.claude/

@@ -5,6 +5,13 @@
     <!-- travando zoom e escala pra não ter zoom out bizarro -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>EAGLE | AI Production Agency</title>
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- GLOBAL RESET --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,7 +46,7 @@
             width: 100%;
             padding: 30px 50px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             z-index: 2000;
             mix-blend-mode: difference;
@@ -49,24 +56,20 @@
         /* --- LOGO LIQUID GLASS --- */
         .logo-container {
             display: block;
-            width: 250px;
-            height: 50px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 30px;
         }
 
         .liquid-logo {
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                120deg, 
-                #ffffff 0%, 
-                rgba(255,255,255,0.3) 40%, 
-                #ffffff 60%, 
-                rgba(255,255,255,0.3) 100%
-            );
-            background-size: 200% auto;
-            animation: shine 4s linear infinite;
+            background: #ffffff;
 
-            -webkit-mask-image: url("/images/LOGO%20EAGLE.png");
+            -webkit-mask-image: url("images/LOGO%20EAGLE.png");
             -webkit-mask-size: contain;
             mask-size: contain;
             -webkit-mask-repeat: no-repeat;
@@ -170,7 +173,7 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
             padding: 140px 20px 60px 20px;
             background: #000;
         }
@@ -185,24 +188,32 @@
             z-index: 0;
             pointer-events: none;
         }
+        /* dark scrim on the left so the text stays legible over the video */
+        .hero-section::after{
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                rgba(0,0,0,0.88) 0%,
+                rgba(0,0,0,0.65) 28%,
+                rgba(0,0,0,0.25) 50%,
+                rgba(0,0,0,0) 68%);
+            z-index: 1;
+            pointer-events: none;
+        }
 .hero-text-layer {
             z-index: 2;
             width: 100%;
             pointer-events: none;
         }
         .huge-text {
-            font-size: clamp(3.5rem, 11vw, 10rem);
-            font-weight: 600;
-            line-height: 0.85;
+            font-family: 'Syne', 'Helvetica Neue', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 0.95;
             text-transform: uppercase;
-            letter-spacing: -0.04em;
-            color: transparent;
-            background: linear-gradient(110deg, #ffffff 0%, rgba(255,255,255,0.4) 20%, #ffffff 40%, #ffffff 60%, rgba(255,255,255,0.4) 80%, #ffffff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-stroke: 1px rgba(255,255,255,0.3);
-            animation: shine 6s linear infinite;
+            letter-spacing: -0.03em;
+            color: #ffffff;
         }
 
         /* --- HERO SCROLL REVEAL --- */
@@ -226,21 +237,21 @@
         .hero-line-4 { transition-delay: 0.46s; }
 
         .text-top {
-            margin-bottom: 40px;
+            margin-bottom: 10px;
             margin-left: 20px;
         }
         .huge-offset {
-            margin-left: 5vw;
+            margin-left: 0;
         }
         .text-bottom {
-            text-align: right;
-            margin-top: 20px;
-            margin-right: 20px;
+            text-align: left;
+            margin-top: 10px;
+            margin-left: 20px;
         }
 
         .hero-spinner-container {
             position: absolute;
-            left: 50px;
+            right: 50px;
             bottom: 50px;
             z-index: 10;
             width: 100px;
@@ -268,7 +279,7 @@
         .marquee-section {
             background: #ffffff;
             color: #000;
-            padding: 40px 0;
+            padding: 16px 0;
             overflow: hidden;
             white-space: nowrap;
             border-bottom: 1px solid #ddd;
@@ -278,10 +289,11 @@
             animation: scrollText 20s linear infinite;
         }
         .marquee-content span {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 0.95rem;
+            font-weight: 500;
             text-transform: uppercase;
-            margin-right: 60px;
+            letter-spacing: 0.05em;
+            margin-right: 40px;
         }
         @keyframes scrollText {
             0% { transform: translateX(0); }
@@ -652,8 +664,8 @@
             }
 
             .logo-container {
-                width: 160px;
-                height: 40px;
+                width: 130px;
+                height: 28px;
             }
 
             .nav-overlay {
@@ -674,21 +686,32 @@
             }
 
             .hero-section {
-                padding: 120px 16px 40px 16px;
-                min-height: auto;
+                padding: 110px 16px 44px 16px;
+                min-height: 88vh;
                 height: auto;
                 overflow: hidden;
+                justify-content: flex-end;
+            }
+
+            /* mobile: text sits at the bottom-right, darken the bottom */
+            .hero-section::after {
+                background: linear-gradient(180deg,
+                    rgba(0,0,0,0) 35%,
+                    rgba(0,0,0,0.15) 55%,
+                    rgba(0,0,0,0.55) 74%,
+                    rgba(0,0,0,0.92) 100%);
             }
 
             .text-top {
                 margin-top: 0;
                 margin-left: 0;
-                margin-bottom: 24px;
+                margin-bottom: 8px;
+                text-align: right;
             }
 
             .huge-text {
-                font-size: 10.5vw;
-                line-height: 0.9;
+                font-size: 8vw;
+                line-height: 0.95;
                 letter-spacing: -0.02em;
             }
 
@@ -697,9 +720,11 @@
             }
 
             .text-bottom {
-                margin-right: 8px;
-                margin-top: 12px;
+                margin-right: 0;
+                margin-left: 0;
+                margin-top: 8px;
                 margin-bottom: 0;
+                text-align: right;
             }
 
             .why-section {
@@ -939,8 +964,8 @@
 
         @media (max-width: 480px) {
             .marquee-content span {
-                font-size: 1.4rem;
-                margin-right: 32px;
+                font-size: 0.85rem;
+                margin-right: 28px;
             }
 
             .quote-text {
@@ -1310,25 +1335,6 @@
             opacity: 0.35;
             pointer-events:none;
         }
-
-    
-        
-            50%{background-position:100% 50%}
-            100%{background-position:0% 50%}
-        }
-
-    
-        /* --- TESTIMONIAL: ORIGINAL LIQUID ANIMATED BACKGROUND --- */
-        .testimonial-section{
-            position: relative;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 70px 50px;
-            overflow: hidden;
-            background: #000;
-        }
         #testimonialCanvas{
             position: absolute;
             inset: 0;
@@ -1381,15 +1387,15 @@
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding-left: 50px;
+    padding-left: 16px;
     padding-right: 50px;
   }
   .text-top{ margin-left: 0 !important; }
-  .text-bottom{ margin-right: 0 !important; }
+  .text-bottom{ margin-right: 0 !important; margin-left: 0 !important; }
 
   /* stop clipping right glow/stroke on hero text */
   .hero-section{
-    padding-left: 80px !important;
+    padding-left: 40px !important;
     padding-right: 80px !important;
     overflow-x: clip;
   }
@@ -1511,7 +1517,7 @@ header > *{
                 <svg class="circular-text" viewBox="0 0 100 100">
                     <path id="circle-menu" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                     <text font-size="11" fill="white" font-weight="bold" letter-spacing="1">
-                        <textPath href="#circle-menu">EAGLE AI AGENCY • FUTURE •</textPath>
+                        <textPath href="#circle-menu">EAGLE AI AGENCY • FASTER & SMARTER •</textPath>
                     </text>
                 </svg>
             </div>
@@ -1521,7 +1527,7 @@ header > *{
     <!-- 1. HERO -->
     <section id="hero" class="hero-section">
             <video class="hero-bg-video" autoplay muted loop playsinline preload="metadata">
-        <source src="/videos/HERO%20video%20BACKGROUND.mp4" type="video/mp4">
+        <source src="videos/HERO-chrome.mp4" type="video/mp4">
     </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
         <div class="hero-text-layer text-top">
@@ -1532,7 +1538,7 @@ header > *{
             <svg class="circular-text" viewBox="0 0 100 100">
                 <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                 <text font-size="11" fill="white" font-weight="bold" letter-spacing="1">
-                    <textPath href="#circle">EAGLE AI AGENCY • FUTURE •</textPath>
+                    <textPath href="#circle">EAGLE AI AGENCY • FASTER & SMARTER •</textPath>
                 </text>
             </svg>
         </div>
@@ -1559,7 +1565,7 @@ header > *{
         <div class="services-header">What We Do</div>
         <div class="services-wrapper">
             <div class="panel">
-                <img src="/images/PRODUCT%20STILL.png"
+                <img src="images/PRODUCT%20STILL.png"
                      class="panel-img" alt="Product">
                 <div class="panel-content">
                     <h3 class="service-name">Product Still</h3>
@@ -1567,7 +1573,7 @@ header > *{
                 </div>
             </div>
             <div class="panel">
-                <img src="/images/FASHION%20SHOOTING.png"
+                <img src="images/FASHION%20SHOOTING.png"
                      class="panel-img" alt="Fashion">
                 <div class="panel-content">
                     <h3 class="service-name">Fashion Shooting</h3>
@@ -1575,19 +1581,11 @@ header > *{
                 </div>
             </div>
             <div class="panel">
-                <img src="/images/BRANDED%20CONTENT.png"
+                <img src="images/BRANDED%20CONTENT.png"
                      class="panel-img" alt="Branded Content">
                 <div class="panel-content">
                     <h3 class="service-name">Branded Content</h3>
                     <span class="service-id">[ 03 ]</span>
-                </div>
-            </div>
-            <div class="panel">
-                <img src="/images/CREATIVE%20CAMPAIGNS.png"
-                     class="panel-img" alt="Creative">
-                <div class="panel-content">
-                    <h3 class="service-name">Creative Campaigns</h3>
-                    <span class="service-id">[ 04 ]</span>
                 </div>
             </div>
         </div>
@@ -1683,7 +1681,7 @@ header > *{
                class="portfolio-card">
                 <div class="portfolio-thumb">
                     <video autoplay muted loop playsinline preload="metadata" aria-label="Timeless Fashion - Drop 01">
-                    <source src="/videos/TIMELESS%20FASHION%20-%20selected%20work%20video.mp4" type="video/mp4">
+                    <source src="videos/TIMELESS%20FASHION%20-%20selected%20work%20video.mp4" type="video/mp4">
                 </video>
                 </div>
                 <div class="portfolio-meta">
@@ -1697,7 +1695,7 @@ header > *{
                class="portfolio-card">
                 <div class="portfolio-thumb">
                     <video autoplay muted loop playsinline preload="metadata" aria-label="Fragrance Product Still">
-                    <source src="/videos/SUPREMACY%20-%20selected%20work%20video.mp4" type="video/mp4">
+                    <source src="videos/SUPREMACY%20-%20selected%20work%20video.mp4" type="video/mp4">
                 </video>
                 </div>
                 <div class="portfolio-meta">
@@ -1712,7 +1710,7 @@ header > *{
                class="portfolio-card">
                 <div class="portfolio-thumb">
                     <video autoplay muted loop playsinline preload="metadata" aria-label="Granno Coffee Bar">
-                    <source src="/videos/GRANNO%20selected%20work%20video.mp4" type="video/mp4">
+                    <source src="videos/GRANNO%20selected%20work%20video.mp4" type="video/mp4">
                 </video>
                 </div>
                 <div class="portfolio-meta">
