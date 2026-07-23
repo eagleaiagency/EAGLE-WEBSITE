@@ -303,91 +303,148 @@
         /* --- WHY EAGLE (DIFERENCIAIS) --- */
         .why-section {
             display: flex;
+            align-items: stretch;
             background-color: #050505;
             color: #fff;
             position: relative;
+            aspect-ratio: 16 / 9;
+            min-height: 540px;
+            overflow: hidden;
+        }
+        /* liquid video background (subject lower-left, dark right for text) */
+        .why-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .why-media {
+            position: absolute;
+            inset: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .why-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: left center;
+        }
+        .why-media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg,
+                    rgba(0,0,0,0.15) 0%,
+                    rgba(0,0,0,0.05) 45%,
+                    rgba(0,0,0,0.18) 100%),
+                linear-gradient(to top,
+                    #050505 0%,
+                    rgba(5,5,5,0.9) 14%,
+                    rgba(5,5,5,0.45) 30%,
+                    rgba(5,5,5,0) 50%);
+        }
+        .why-section .left-content,
+        .why-section .right-content {
+            position: relative;
+            z-index: 1;
+        }
+        .why-section .main-headline,
+        .why-section .description,
+        .why-section .section-label {
+            text-shadow: 0 2px 16px rgba(0,0,0,0.7);
         }
         .left-content {
-            width: 40%;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            padding: 80px 60px;
+            width: 44%;
+            padding: 5% 3.5% 6% 4%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            border-right: 1px solid #222;
+            justify-content: flex-end;
+            align-items: flex-start;
+            z-index: 1;
         }
         .section-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 2px;
-            color: #666;
-            margin-bottom: 20px;
+            color: #888;
+            margin-bottom: 14px;
             display: block;
         }
         .main-headline {
-            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-size: clamp(1.9rem, 3.2vw, 3.2rem);
             line-height: 1;
-            margin-bottom: 30px;
+            margin-bottom: 14px;
             text-transform: uppercase;
-            color: transparent;
-            background: linear-gradient(120deg, #fff 0%, #777 30%, #fff 50%, #777 70%, #fff 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: shine 8s linear infinite;
+            color: #ffffff;
         }
         .description {
-            font-size: 1.1rem;
-            color: #999;
-            line-height: 1.5;
-            max-width: 90%;
+            font-size: clamp(0.85rem, 1vw, 1rem);
+            color: #cfcfcf;
+            line-height: 1.45;
+            max-width: 34ch;
             font-weight: 300;
         }
         .right-content {
-            width: 60%;
-            padding: 120px 60px;
+            width: 58%;
+            padding: 3.5% 5% 3.5% 2.5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 1;
         }
         .cards-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 15vh;
+            align-items: flex-end;
+            gap: clamp(7px, 1.2vh, 13px);
         }
         .diff-card {
-            height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 40px;
-            border-top: 1px solid #fff;
-            border-bottom: 1px solid #333;
-            background: linear-gradient(90deg, #111 0%, #050505 100%);
-            width: 20%;
-            margin-left: auto;
-            opacity: 0.2;
-            transform: translateX(60px);
-            transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+            gap: 3px;
+            padding: 10px 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            width: fit-content;
+            max-width: min(300px, 100%);
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.3s ease, background 0.3s ease;
         }
         .diff-card.active {
-            width: 100%;
             opacity: 1;
-            transform: translateX(0);
+            transform: translateY(0);
+        }
+        .diff-card:hover {
+            background: rgba(255,255,255,0.09);
+            border-color: rgba(255,255,255,0.22);
         }
         .card-number {
-            font-size: 0.9rem;
-            color: #555;
-            margin-bottom: 15px;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.45);
+            margin: 0;
         }
         .card-title {
-            font-size: 2.5rem;
+            font-size: clamp(0.95rem, 1.25vw, 1.2rem);
             text-transform: uppercase;
-            margin-bottom: 10px;
+            letter-spacing: -0.01em;
+            margin: 0;
             white-space: nowrap;
         }
         .card-desc {
-            font-size: 1rem;
-            color: #888;
-            max-width: 450px;
+            font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+            color: rgba(255,255,255,0.6);
+            line-height: 1.3;
+            margin: 0;
+            max-width: 30ch;
         }
 
         /* --- TESTIMONIAL --- */
@@ -421,18 +478,22 @@
             padding: 60px;
             text-align: center;
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
             opacity: 0;
-            transform: scale(0.95);
-            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.97);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .glass-card.active {
             opacity: 1;
             transform: scale(1);
+        }
+        .glass-card-compact:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.2);
         }
         .quote-symbol {
             font-size: 6rem;
@@ -440,10 +501,7 @@
             font-family: serif;
             margin-bottom: 30px;
             display: block;
-            color: transparent;
-            background: linear-gradient(135deg, #fff, #aaa);
-            -webkit-background-clip: text;
-            background-clip: text;
+            color: rgba(255,255,255,0.28);
         }
         .quote-text {
             font-size: clamp(1.8rem, 4vw, 3rem);
@@ -457,8 +515,8 @@
         .client-info {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            font-size: 0.9rem;
+            gap: 3px;
+            font-size: 0.72rem;
             letter-spacing: 1px;
             text-transform: uppercase;
         }
@@ -555,6 +613,93 @@
         }
         .panel:hover .service-id {
             opacity: 0;
+        }
+
+        /* --- MORE SERVICES (Website + Visual Identity) --- */
+        .more-services {
+            position: relative;
+            background: #050505;
+            padding: 72px 50px;
+        }
+        .ms-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+        .ms-header {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+        .ms-title {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+        .ms-subtitle {
+            max-width: 540px;
+            margin: 0 auto;
+            font-size: 0.88rem;
+            color: #bdbdbd;
+            line-height: 1.45;
+        }
+        .ms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .ms-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.04);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1),
+                        border-color 0.3s ease;
+        }
+        .ms-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255,255,255,0.22);
+        }
+        .ms-media {
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+        .ms-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) grayscale(0.35);
+            transition: filter 0.6s ease, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+        }
+        .ms-card:hover .ms-media img {
+            filter: brightness(1) grayscale(0);
+            transform: scale(1.05);
+        }
+        .ms-body {
+            padding: 20px 24px 24px;
+        }
+        .ms-num {
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.45);
+        }
+        .ms-name {
+            font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            margin: 6px 0 8px;
+        }
+        .ms-desc {
+            font-size: 0.86rem;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.45;
+            max-width: 44ch;
+        }
+        @media (max-width: 900px) {
+            .more-services { padding: 48px 16px; }
+            .ms-grid { grid-template-columns: 1fr; gap: 14px; }
         }
 
         /* --- FOOTER / CTA --- */
@@ -729,6 +874,8 @@
 
             .why-section {
                 flex-direction: column;
+                aspect-ratio: auto;
+                min-height: auto;
             }
             .left-content {
                 width: 100%;
@@ -742,7 +889,7 @@
                 padding: 10px 20px 40px 20px;
             }
             .cards-wrapper {
-                gap: 40px;
+                gap: 16px;
             }
             .diff-card {
                 width: 100%;
@@ -1228,23 +1375,33 @@
         .glass-card-compact{
             max-width: none;
             width: 100%;
-            padding: 38px 34px;
-            border-radius: 20px;
+            padding: 24px 26px;
+            border-radius: 16px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .glass-card-compact .client-info{
+            margin-top: auto;
         }
         .quote-text-compact{
-            font-size: clamp(1.15rem, 2.2vw, 1.8rem);
+            font-size: clamp(0.92rem, 1.35vw, 1.1rem);
+            font-weight: 400;
             line-height: 1.45;
-            margin-bottom: 26px;
+            letter-spacing: 0;
+            margin-bottom: 16px;
         }
         .glass-card-compact .quote-symbol{
-            font-size: 4.8rem;
-            margin-bottom: 18px;
+            font-size: 2.4rem;
+            line-height: 0.6;
+            margin-bottom: 6px;
         }
         @media (max-width: 900px){
-            .testimonial-section{ padding: 50px 16px; min-height: auto; }
-            .testimonial-grid-compact{ grid-template-columns: 1fr; gap: 14px; }
-            .glass-card-compact{ padding: 28px 18px; }
-            .quote-text-compact{ font-size: 1.25rem; }
+            .testimonial-section{ padding: 44px 16px; }
+            .testimonial-grid-compact{ grid-template-columns: 1fr; gap: 12px; }
+            .glass-card-compact{ padding: 20px 20px; }
+            .quote-text-compact{ font-size: 0.95rem; }
         }
 
     
@@ -1256,16 +1413,17 @@
             margin-bottom: 36px;
         }
         .testimonial-title{
-            font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
             font-weight: 600;
-            letter-spacing: -0.04em;
-            margin-bottom: 10px;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
         }
         .testimonial-subtitle{
-            max-width: 560px;
+            max-width: 520px;
             margin: 0 auto;
-            font-size: 0.95rem;
-            color: #cccccc;
+            font-size: 0.88rem;
+            color: #bdbdbd;
+            line-height: 1.4;
         }
 
     
@@ -1285,22 +1443,22 @@
         .testimonial-inner-centered{
             position: relative;
             z-index: 10;
-            max-width: 1200px;
+            max-width: 1040px;
             margin: 0 auto;
-            padding: 60px 40px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
         .testimonial-header{
-            margin-bottom: 48px;
+            margin-bottom: 28px;
         }
         .testimonial-grid-compact{
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 16px;
         }
         @media (max-width: 900px){
             .testimonial-inner-centered{
@@ -1316,11 +1474,11 @@
         /* --- TESTIMONIAL: ORIGINAL ANIMATED BACKGROUND (RESTORED) --- */
         .testimonial-section{
             position: relative;
-            min-height: 80vh;
+            min-height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 70px 50px;
+            padding: 64px 50px;
             overflow: hidden;
             background: #000;
         }
@@ -1591,6 +1749,44 @@ header > *{
         </div>
     </section>
 
+    <!-- 3b. MORE SERVICES -->
+    <section id="more-services" class="more-services">
+        <div class="ms-inner">
+            <div class="ms-header">
+                <h2 class="ms-title">More than visuals</h2>
+                <p class="ms-subtitle">
+                    We don't stop at the shoot — we build the digital home and the brand identity your business lives in.
+                </p>
+            </div>
+            <div class="ms-grid">
+                <article class="ms-card">
+                    <div class="ms-media">
+                        <img src="images/WEBSITE%20DESIGN.png" alt="Website Creation">
+                    </div>
+                    <div class="ms-body">
+                        <span class="ms-num">/ 01</span>
+                        <h3 class="ms-name">Website Creation</h3>
+                        <p class="ms-desc">
+                            Custom, high-performance websites — from concept to launch. Modern, fast, and built to convert.
+                        </p>
+                    </div>
+                </article>
+                <article class="ms-card">
+                    <div class="ms-media">
+                        <img src="images/VISUAL%20IDENTITY.png" alt="Visual Identity">
+                    </div>
+                    <div class="ms-body">
+                        <span class="ms-num">/ 02</span>
+                        <h3 class="ms-name">Visual Identity</h3>
+                        <p class="ms-desc">
+                            Logos, brand systems, and complete visual languages that make your brand unmistakable.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- 4. TESTIMONIAL -->
 <section class="testimonial-section">
         <div class="testimonial-inner-centered">
@@ -1633,6 +1829,13 @@ header > *{
 
     <!-- 5. WHY EAGLE (DIFERENCIAIS) -->
     <section id="why" class="why-section">
+        <div class="why-bg" aria-hidden="true">
+            <div class="why-media">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="videos/why-liquid.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
         <div class="left-content">
             <span class="section-label">03 — The Revolution</span>
             <h2 class="main-headline">Beyond Human<br>Constraints.</h2>
