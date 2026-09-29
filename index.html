@@ -193,11 +193,14 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(90deg,
-                rgba(0,0,0,0.88) 0%,
-                rgba(0,0,0,0.65) 28%,
-                rgba(0,0,0,0.25) 50%,
-                rgba(0,0,0,0) 68%);
+            background:
+                /* top: keeps the header logo/menu readable on bright shots */
+                linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 20%),
+                linear-gradient(90deg,
+                    rgba(0,0,0,0.88) 0%,
+                    rgba(0,0,0,0.65) 28%,
+                    rgba(0,0,0,0.25) 50%,
+                    rgba(0,0,0,0) 68%);
             z-index: 1;
             pointer-events: none;
         }
@@ -302,149 +305,97 @@
 
         /* --- WHY EAGLE (DIFERENCIAIS) --- */
         .why-section {
-            display: flex;
-            align-items: stretch;
-            background-color: #050505;
-            color: #fff;
             position: relative;
-            aspect-ratio: 16 / 9;
-            min-height: 540px;
-            overflow: hidden;
+            background-color: #f2f1ec;
+            color: #0e0e0e;
+            padding: clamp(64px, 8vw, 120px) clamp(20px, 6vw, 80px);
         }
-        /* liquid video background (subject lower-left, dark right for text) */
-        .why-bg {
-            position: absolute;
-            inset: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .why-media {
-            position: absolute;
-            inset: 0;
-            height: 100%;
-            overflow: hidden;
-        }
-        .why-media video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: left center;
-        }
-        .why-media::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(90deg,
-                    rgba(0,0,0,0.15) 0%,
-                    rgba(0,0,0,0.05) 45%,
-                    rgba(0,0,0,0.18) 100%),
-                linear-gradient(to top,
-                    #050505 0%,
-                    rgba(5,5,5,0.9) 14%,
-                    rgba(5,5,5,0.45) 30%,
-                    rgba(5,5,5,0) 50%);
-        }
-        .why-section .left-content,
-        .why-section .right-content {
-            position: relative;
-            z-index: 1;
-        }
-        .why-section .main-headline,
-        .why-section .description,
-        .why-section .section-label {
-            text-shadow: 0 2px 16px rgba(0,0,0,0.7);
-        }
-        .left-content {
-            width: 44%;
-            padding: 5% 3.5% 6% 4%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            align-items: flex-start;
-            z-index: 1;
+        .why-head {
+            max-width: 720px;
+            margin: 0 auto clamp(40px, 5vw, 68px);
+            text-align: center;
         }
         .section-label {
             font-size: 0.75rem;
             letter-spacing: 2px;
-            color: #888;
-            margin-bottom: 14px;
+            text-transform: uppercase;
+            color: #9a948a;
+            margin-bottom: 16px;
             display: block;
         }
         .main-headline {
-            font-size: clamp(1.9rem, 3.2vw, 3.2rem);
-            line-height: 1;
-            margin-bottom: 14px;
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 1.02;
+            margin-bottom: 18px;
             text-transform: uppercase;
-            color: #ffffff;
+            color: #0a0a0a;
         }
         .description {
-            font-size: clamp(0.85rem, 1vw, 1rem);
-            color: #cfcfcf;
-            line-height: 1.45;
-            max-width: 34ch;
-            font-weight: 300;
+            font-size: clamp(0.95rem, 1.1vw, 1.12rem);
+            color: #55524c;
+            line-height: 1.55;
+            max-width: 52ch;
+            margin: 0 auto;
         }
-        .right-content {
-            width: 58%;
-            padding: 3.5% 5% 3.5% 2.5%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            z-index: 1;
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(14px, 1.6vw, 22px);
+            max-width: 1180px;
+            margin: 0 auto;
         }
-        .cards-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: clamp(7px, 1.2vh, 13px);
+        @media (max-width: 1040px) {
+            .why-grid { grid-template-columns: repeat(2, 1fr); }
         }
         .diff-card {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 3px;
-            padding: 10px 18px;
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 12px;
-            background: rgba(255,255,255,0.05);
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
-            width: fit-content;
-            max-width: min(300px, 100%);
+            gap: 12px;
+            padding: clamp(24px, 2vw, 32px) clamp(20px, 1.8vw, 26px);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
             opacity: 0;
             transform: translateY(24px);
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
                         transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.3s ease, background 0.3s ease;
+                        box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .diff-card.active {
             opacity: 1;
             transform: translateY(0);
         }
         .diff-card:hover {
-            background: rgba(255,255,255,0.09);
-            border-color: rgba(255,255,255,0.22);
+            box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+            border-color: rgba(0,0,0,0.14);
         }
         .card-number {
-            font-size: 0.68rem;
-            letter-spacing: 0.08em;
-            color: rgba(255,255,255,0.45);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 999px;
+            background: #0a0a0a;
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0;
             margin: 0;
         }
         .card-title {
-            font-size: clamp(0.95rem, 1.25vw, 1.2rem);
-            text-transform: uppercase;
+            font-size: clamp(1.02rem, 1.2vw, 1.18rem);
+            font-weight: 600;
             letter-spacing: -0.01em;
             margin: 0;
-            white-space: nowrap;
+            color: #0a0a0a;
         }
         .card-desc {
-            font-size: clamp(0.72rem, 0.85vw, 0.82rem);
-            color: rgba(255,255,255,0.6);
-            line-height: 1.3;
+            font-size: clamp(0.86rem, 0.92vw, 0.94rem);
+            color: #5c5850;
+            line-height: 1.5;
             margin: 0;
-            max-width: 30ch;
         }
 
         /* --- TESTIMONIAL --- */
@@ -642,10 +593,13 @@
             color: #bdbdbd;
             line-height: 1.45;
         }
+        .ms-header .section-label {
+            margin-bottom: 12px;
+        }
         .ms-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
         }
         .ms-card {
             position: relative;
@@ -663,7 +617,7 @@
             border-color: rgba(255,255,255,0.22);
         }
         .ms-media {
-            aspect-ratio: 4 / 3;
+            aspect-ratio: 4 / 5;
             overflow: hidden;
         }
         .ms-media img {
@@ -678,7 +632,7 @@
             transform: scale(1.05);
         }
         .ms-body {
-            padding: 20px 24px 24px;
+            padding: 16px 18px 20px;
         }
         .ms-num {
             font-size: 0.7rem;
@@ -686,26 +640,459 @@
             color: rgba(255,255,255,0.45);
         }
         .ms-name {
-            font-size: clamp(1.15rem, 1.8vw, 1.55rem);
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
             text-transform: uppercase;
             letter-spacing: -0.01em;
-            margin: 6px 0 8px;
+            margin: 6px 0 10px;
+        }
+        .ms-problem {
+            font-size: 0.82rem;
+            line-height: 1.4;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 8px;
+        }
+        .ms-problem span {
+            display: block;
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            margin-bottom: 2px;
         }
         .ms-desc {
             font-size: 0.86rem;
-            color: rgba(255,255,255,0.62);
+            color: rgba(255,255,255,0.82);
             line-height: 1.45;
-            max-width: 44ch;
+        }
+        @media (max-width: 1100px) {
+            .ms-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (max-width: 900px) {
             .more-services { padding: 48px 16px; }
-            .ms-grid { grid-template-columns: 1fr; gap: 14px; }
+            .ms-grid { gap: 12px; }
+        }
+        @media (max-width: 600px) {
+            .ms-grid { grid-template-columns: 1fr; }
+            .ms-media { aspect-ratio: 16 / 10; }
+        }
+
+        /* --- HERO: plain-language subline --- */
+        .hero-sub {
+            max-width: 36ch;
+            margin-top: 18px;
+            font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+            line-height: 1.45;
+            color: rgba(255,255,255,0.88);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+        }
+        .hero-line-5 { transition-delay: 0.58s; }
+        @media (max-width: 900px) {
+            .hero-sub { margin-left: auto; margin-top: 12px; font-size: 0.85rem; max-width: 30ch; }
+        }
+
+        /* --- OUR WORK (overrides the older portfolio rules further down) --- */
+        #work .portfolio-inner { max-width: 1200px; }
+        #work .portfolio-header { margin-bottom: 36px; }
+        #work .portfolio-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 1100px) {
+            #work .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        #work .portfolio-card {
+            font: inherit;
+            text-align: left;
+            padding: 0;
+            width: 100%;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        #work .portfolio-card:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 4px;
+        }
+        #work .portfolio-thumb { padding-top: 110%; }
+        #work .portfolio-thumb video { transform: none; }
+        #work .portfolio-card:hover .portfolio-thumb video { transform: scale(1.05); }
+        #work .portfolio-line {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.4;
+        }
+        #work .portfolio-open {
+            margin-top: 6px;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            #work .portfolio-grid { grid-template-columns: 1fr; }
+        }
+
+        /* --- PROJECT DRAWER --- */
+        html.pd-lock, html.pd-lock body { overflow: hidden; }
+        .project-drawer {
+            position: fixed;
+            inset: 0;
+            z-index: 2500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            visibility: hidden;
+            pointer-events: none;
+            transition: visibility 0s linear 0.5s;
+        }
+        .project-drawer.open {
+            visibility: visible;
+            pointer-events: auto;
+            transition: visibility 0s;
+        }
+        .pd-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .project-drawer.open .pd-backdrop { opacity: 1; }
+        .pd-panel {
+            position: relative;
+            width: min(1120px, 100%);
+            max-height: calc(100vh - 48px);
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 26px;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+            opacity: 0;
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            outline: none;
+        }
+        .pd-panel::-webkit-scrollbar { width: 0; height: 0; display: none; }
+        .project-drawer.open .pd-panel {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .pd-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            display: flex;
+            justify-content: flex-end;
+            padding: 16px;
+            margin-bottom: -76px;
+            pointer-events: none;
+        }
+        .pd-close {
+            pointer-events: auto;
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(10,10,10,0.6);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+        .pd-close:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.5); }
+        .pd-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+        .pd-content { padding: 72px 48px 64px; }
+        .pd-head { max-width: 62ch; margin-bottom: 32px; }
+        .pd-eyebrow {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 12px;
+        }
+        .pd-title {
+            font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 1.02;
+            margin-bottom: 14px;
+        }
+        .pd-lead {
+            font-size: 1.02rem;
+            line-height: 1.5;
+            color: #d6d6d6;
+        }
+        .pd-facts {
+            display: grid;
+            grid-template-columns: 1fr 1fr 0.7fr;
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+        .pd-fact {
+            padding: 16px 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+        }
+        .pd-fact span {
+            display: block;
+            font-size: 0.66rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 6px;
+        }
+        .pd-fact p {
+            font-size: 0.9rem;
+            line-height: 1.45;
+            color: rgba(255,255,255,0.85);
+        }
+        .pd-quote {
+            margin: 0 0 28px;
+            padding: 18px 22px;
+            border-left: 2px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.03);
+            border-radius: 0 14px 14px 0;
+        }
+        .pd-quote p {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        .pd-quote cite {
+            font-style: normal;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.55);
+        }
+        .pd-note {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-bottom: 24px;
+        }
+        .pd-gallery {
+            column-count: 2;
+            column-gap: 12px;
+        }
+        .pd-gallery img,
+        .pd-gallery video {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            break-inside: avoid;
+            background: #111;
+        }
+        .pd-cta {
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        .pd-cta p {
+            font-size: 0.98rem;
+            color: #d6d6d6;
+            margin-bottom: 18px;
+        }
+        .pd-cta .cta-btn { padding: 16px 40px; font-size: 0.85rem; }
+        @media (max-width: 900px) {
+            .project-drawer { padding: 14px; }
+            .pd-panel { border-radius: 20px; max-height: calc(100vh - 28px); }
+            .pd-content { padding: 72px 20px 48px; }
+            .pd-facts { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 420px) {
+            .pd-gallery { column-count: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .pd-panel, .pd-backdrop { transition: none; }
+        }
+
+        /* --- CONTACT: blurred video bg, oversized symbol bleeding off the left, content right --- */
+        footer::before { display: none; }
+        .footer-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .footer-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.08); /* hides the soft edges of the pre-blurred video */
+        }
+        .footer-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                /* blend into the Why section above, keep the text side darker */
+                linear-gradient(180deg, #050505 0%, rgba(5,5,5,0) 180px),
+                linear-gradient(90deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.72) 100%);
+        }
+        .footer-spinner {
+            position: absolute;
+            z-index: 1;
+            left: -9vw;
+            top: 46%;
+            transform: translateY(-50%);
+            width: clamp(300px, 36vw, 600px);
+            aspect-ratio: 1;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+        .footer-spinner .circular-text { animation-duration: 36s; }
+        /* The rotating brand text is a gentle, continuous signature spin —
+           kept running even under reduced-motion, per brand direction. */
+        .contact-wrap {
+            position: relative;
+            z-index: 2;
+            max-width: 1180px;
+            min-height: 440px;
+            margin: 0 auto 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        .contact-main {
+            max-width: 460px;
+            text-align: right;
+        }
+        footer .footer-bottom { z-index: 2; }
+        .contact-main .cta-subtitle { margin: 0 0 26px auto; }
+        .contact-lines {
+            list-style: none;
+            margin: 0 0 28px;
+            padding: 0;
+            display: grid;
+            gap: 10px;
+        }
+        .contact-lines li {
+            display: flex;
+            justify-content: flex-end;
+            align-items: baseline;
+            gap: 14px;
+        }
+        .contact-lines span {
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+        }
+        .contact-lines a {
+            font-size: 1.05rem;
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+            transition: border-color 0.2s ease;
+        }
+        .contact-lines a:hover { border-color: #fff; }
+        .contact-actions { display: flex; justify-content: flex-end; }
+        .wa-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 26px;
+            border-radius: 999px;
+            background: #fff;
+            color: #000;
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+        }
+        .wa-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.15);
+        }
+        .wa-btn:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+        .wa-icon { display: grid; place-items: center; }
+        .wa-icon svg { width: 20px; height: 20px; }
+        @media (max-width: 760px) {
+            /* on phones the circle becomes a large watermark behind the text */
+            .footer-spinner {
+                width: 125vw;
+                left: -45vw;
+                top: 40%;
+                opacity: 0.18;
+            }
+            .contact-wrap { min-height: 0; }
+            .contact-main { max-width: none; }
+        }
+
+        /* --- LOADING SCREEN (symbol only) --- */
+        .site-loader {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: grid;
+            place-items: center;
+            background: #000;
+            transition: opacity 0.6s ease, visibility 0s linear 0.6s;
+            /* safety net: hides itself even if the script never runs */
+            animation: loader-failsafe 0s linear 6s forwards;
+        }
+        .site-loader img {
+            width: 76px;
+            height: auto;
+            filter: brightness(0) invert(1);
+            animation: loader-breathe 1.6s ease-in-out infinite;
+        }
+        .loader-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+        }
+        .loader-bar {
+            width: 120px;
+            height: 2px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.14);
+            overflow: hidden;
+        }
+        .loader-bar span {
+            display: block;
+            height: 100%;
+            width: 100%;
+            background: #fff;
+            transform-origin: left center;
+            transform: scaleX(0);
+            animation: loader-fill 1.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+        }
+        @keyframes loader-fill { to { transform: scaleX(1); } }
+        .site-loader.is-done { opacity: 0; visibility: hidden; }
+        @keyframes loader-breathe {
+            0%, 100% { opacity: 0.35; transform: scale(0.96); }
+            50%      { opacity: 1;    transform: scale(1); }
+        }
+        @keyframes loader-failsafe { to { opacity: 0; visibility: hidden; } }
+        @media (prefers-reduced-motion: reduce) {
+            .site-loader img { animation: none; }
+            .site-loader { transition: none; }
         }
 
         /* --- FOOTER / CTA --- */
         footer {
             position: relative;
-            background: radial-gradient(circle at 0% 0%, #1a1a1f, #020204 55%, #000000 100%);
+            background: #050505;
             color: #ffffff;
             padding: 100px 50px 60px 50px;
             text-align: center;
@@ -720,6 +1107,9 @@
             filter: blur(30px);
             animation: ctaGlow 12s ease-in-out infinite alternate;
             pointer-events: none;
+            /* the glow box starts 40% above the footer; fade it in below the top edge so it doesn't draw a seam */
+            -webkit-mask-image: linear-gradient(to bottom, transparent 22%, #000 40%);
+            mask-image: linear-gradient(to bottom, transparent 22%, #000 40%);
         }
         @keyframes ctaGlow {
             0% {
@@ -841,6 +1231,8 @@
             /* mobile: text sits at the bottom-right, darken the bottom */
             .hero-section::after {
                 background: linear-gradient(180deg,
+                    rgba(0,0,0,0.55) 0%,
+                    rgba(0,0,0,0) 16%,
                     rgba(0,0,0,0) 35%,
                     rgba(0,0,0,0.15) 55%,
                     rgba(0,0,0,0.55) 74%,
@@ -873,36 +1265,14 @@
             }
 
             .why-section {
-                flex-direction: column;
-                aspect-ratio: auto;
-                min-height: auto;
+                padding: 56px 20px;
             }
-            .left-content {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 40px 20px 20px 20px;
-                border-right: none;
-            }
-            .right-content {
-                width: 100%;
-                padding: 10px 20px 40px 20px;
-            }
-            .cards-wrapper {
-                gap: 16px;
-            }
-            .diff-card {
-                width: 100%;
-                margin: 0;
-                height: auto;
-                padding: 24px 18px;
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
             }
             .card-title {
-                font-size: 1.7rem;
-                white-space: normal;
-            }
-            .card-desc {
-                max-width: 100%;
+                font-size: 1.2rem;
             }
 
             .testimonial-section {
@@ -961,8 +1331,8 @@
 
         /* --- PORTFOLIO --- */
         .portfolio-section {
-            background: #050505;
-            padding: 100px 50px 80px 50px;
+            background: #f2f1ec;
+            padding: clamp(64px, 8vw, 110px) 50px 80px 50px;
         }
         .portfolio-inner {
             max-width: 1200px;
@@ -978,10 +1348,11 @@
             font-size: clamp(2.2rem, 4vw, 3.2rem);
             text-transform: uppercase;
             letter-spacing: -0.04em;
+            color: #0a0a0a;
         }
         .portfolio-subtitle {
             font-size: 1rem;
-            color: #aaa;
+            color: #55524c;
             max-width: 480px;
         }
         .portfolio-grid {
@@ -1063,6 +1434,7 @@
         .portfolio-name {
             font-size: 1.05rem;
             font-weight: 500;
+            color: #fff;
         }
 
         @media (max-width: 900px) {
@@ -1648,6 +2020,14 @@ header > *{
 </head>
 <body>
 
+    <!-- LOADING SCREEN -->
+    <div class="site-loader" id="siteLoader" aria-hidden="true">
+        <div class="loader-inner">
+            <img src="images/favicon-512.png" alt="" width="512" height="512">
+            <div class="loader-bar"><span></span></div>
+        </div>
+    </div>
+
     <!-- HEADER -->
     <header>
         <a href="#hero" class="logo-container">
@@ -1665,17 +2045,17 @@ header > *{
     <div class="nav-overlay" id="navOverlay">
         <div class="nav-links-vertical">
             <a href="#hero" class="nav-item" onclick="toggleMenu()"><span class="nav-number">01</span> HOME</a>
-            <a href="#services" class="nav-item" onclick="toggleMenu()"><span class="nav-number">02</span> WHAT WE DO</a>
-            <a href="#why" class="nav-item" onclick="toggleMenu()"><span class="nav-number">03</span> WHY US</a>
-            <a href="#portfolio" class="nav-item" onclick="toggleMenu()"><span class="nav-number">04</span> PORTFOLIO</a>
+            <a href="#work" class="nav-item" onclick="toggleMenu()"><span class="nav-number">02</span> OUR WORK</a>
+            <a href="#services" class="nav-item" onclick="toggleMenu()"><span class="nav-number">03</span> SERVICES</a>
+            <a href="#why" class="nav-item" onclick="toggleMenu()"><span class="nav-number">04</span> WHY US</a>
             <a href="#contact" class="nav-item" onclick="toggleMenu()"><span class="nav-number">05</span> CONTACT</a>
         </div>
         <div class="menu-footer">
             <div class="menu-spinner">
                 <svg class="circular-text" viewBox="0 0 100 100">
                     <path id="circle-menu" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                    <text font-size="11" fill="white" font-weight="bold" letter-spacing="1">
-                        <textPath href="#circle-menu">EAGLE AI AGENCY • FASTER & SMARTER •</textPath>
+                    <text font-size="9" fill="white" font-weight="bold" letter-spacing="0.9">
+                        <textPath href="#circle-menu" textLength="232" lengthAdjust="spacing">EAGLE AI AGENCY • FASTER &amp; SMARTER • </textPath>
                     </text>
                 </svg>
             </div>
@@ -1684,8 +2064,8 @@ header > *{
 
     <!-- 1. HERO -->
     <section id="hero" class="hero-section">
-            <video class="hero-bg-video" autoplay muted loop playsinline preload="metadata">
-        <source src="videos/HERO-chrome.mp4" type="video/mp4">
+            <video class="hero-bg-video" autoplay muted loop playsinline preload="auto" poster="images/hero-reel-poster.jpg">
+        <source src="videos/HERO-reel.mp4" type="video/mp4">
     </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
         <div class="hero-text-layer text-top">
@@ -1695,265 +2075,352 @@ header > *{
         <div class="hero-spinner-container">
             <svg class="circular-text" viewBox="0 0 100 100">
                 <path id="circle" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
-                <text font-size="11" fill="white" font-weight="bold" letter-spacing="1">
-                    <textPath href="#circle">EAGLE AI AGENCY • FASTER & SMARTER •</textPath>
+                <text font-size="9" fill="white" font-weight="bold" letter-spacing="0.9">
+                    <textPath href="#circle" textLength="232" lengthAdjust="spacing">EAGLE AI AGENCY • FASTER &amp; SMARTER • </textPath>
                 </text>
             </svg>
         </div>
         <div class="hero-text-layer text-bottom">
             <div class="huge-text hero-line hero-line-3">Real &</div>
             <div class="huge-text hero-line hero-line-4">Surreal</div>
+            <p class="hero-sub hero-line hero-line-5">
+                Photos and videos for your brand, made with AI. No photoshoot needed.
+            </p>
         </div>
     </section>
 
-    <!-- 2. MARQUEE -->
-    <section class="marquee-section">
-        <div class="marquee-content">
-            <span>Cost Efficient • Hyper Fast • Ultra Realistic</span>
-            <span>Cost Efficient • Hyper Fast • Ultra Realistic</span>
-            <span>Cost Efficient • Hyper Fast • Ultra Realistic</span>
-            <span>Cost Efficient • Hyper Fast • Ultra Realistic</span>
-            <span>Cost Efficient • Hyper Fast • Ultra Realistic</span>
-            <span>Cost Efficient • Hyper Fast • Ultra Realistic</span>
+    <!-- 3. OUR WORK (portfolio; cards open a project drawer) -->
+    <section id="work" class="portfolio-section">
+        <div class="portfolio-inner">
+            <div class="portfolio-header">
+                <span class="section-label">02 — Our work</span>
+                <h2 class="portfolio-title">Our Work</h2>
+                <p class="portfolio-subtitle">
+                    A few recent projects. Click one to see what the brand needed and what we made.
+                </p>
+            </div>
+            <div class="portfolio-grid">
+                <button type="button" class="portfolio-card" data-project="timeless" data-cursor="View project">
+                    <div class="portfolio-thumb">
+                        <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                            <source src="videos/TIMELESS%20FASHION%20-%20selected%20work%20video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-meta">
+                        <span class="portfolio-tag">Clothing brand · Client project</span>
+                        <h3 class="portfolio-name">Timeless Fashion — Drop 01</h3>
+                        <p class="portfolio-line">A full streetwear launch, shot without a photoshoot.</p>
+                        <span class="portfolio-open">View project <span aria-hidden="true">→</span></span>
+                    </div>
+                </button>
+
+                <button type="button" class="portfolio-card" data-project="vs" data-cursor="View project">
+                    <div class="portfolio-thumb">
+                        <video autoplay muted loop playsinline preload="metadata" poster="images/work/vs/poster-reel.jpg" aria-hidden="true">
+                            <source src="videos/work/vs-reel-showcase.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-meta">
+                        <span class="portfolio-tag">Barbershop · Local business</span>
+                        <h3 class="portfolio-name">V's Barbershop — O-Town West</h3>
+                        <p class="portfolio-line">Posts, stories and two videos for a barbershop in Orlando.</p>
+                        <span class="portfolio-open">View project <span aria-hidden="true">→</span></span>
+                    </div>
+                </button>
+
+                <button type="button" class="portfolio-card" data-project="supremacy" data-cursor="View project">
+                    <div class="portfolio-thumb">
+                        <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+                            <source src="videos/SUPREMACY%20-%20selected%20work%20video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="portfolio-meta">
+                        <span class="portfolio-tag">Perfume ad · Concept project</span>
+                        <h3 class="portfolio-name">Supremacy Collector's Edition</h3>
+                        <p class="portfolio-line">A luxury perfume campaign made entirely with AI.</p>
+                        <span class="portfolio-open">View project <span aria-hidden="true">→</span></span>
+                    </div>
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- 3. WHAT WE DO (SERVICES) -->
-    <section id="services" style="position: relative;">
-        <div class="services-header">What We Do</div>
-        <div class="services-wrapper">
-            <div class="panel">
-                <img src="images/PRODUCT%20STILL.png"
-                     class="panel-img" alt="Product">
-                <div class="panel-content">
-                    <h3 class="service-name">Product Still</h3>
-                    <span class="service-id">[ 01 ]</span>
-                </div>
-            </div>
-            <div class="panel">
-                <img src="images/FASHION%20SHOOTING.png"
-                     class="panel-img" alt="Fashion">
-                <div class="panel-content">
-                    <h3 class="service-name">Fashion Shooting</h3>
-                    <span class="service-id">[ 02 ]</span>
-                </div>
-            </div>
-            <div class="panel">
-                <img src="images/BRANDED%20CONTENT.png"
-                     class="panel-img" alt="Branded Content">
-                <div class="panel-content">
-                    <h3 class="service-name">Branded Content</h3>
-                    <span class="service-id">[ 03 ]</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3b. MORE SERVICES -->
-    <section id="more-services" class="more-services">
+    <!-- 4. SERVICES (problem → solution) -->
+    <section id="services" class="more-services">
         <div class="ms-inner">
             <div class="ms-header">
-                <h2 class="ms-title">More than visuals</h2>
+                <span class="section-label">03 — What we make</span>
+                <h2 class="ms-title">What we can make for you</h2>
                 <p class="ms-subtitle">
-                    We don't stop at the shoot — we build the digital home and the brand identity your business lives in.
+                    Start with the problem you have. Here's how we solve it.
                 </p>
             </div>
             <div class="ms-grid">
                 <article class="ms-card">
                     <div class="ms-media">
-                        <img src="images/WEBSITE%20DESIGN.png" alt="Website Creation">
+                        <img src="images/PRODUCT%20STILL.png" alt="AI product photo of an energy drink can surrounded by splashing liquid" loading="lazy">
                     </div>
                     <div class="ms-body">
                         <span class="ms-num">/ 01</span>
-                        <h3 class="ms-name">Website Creation</h3>
-                        <p class="ms-desc">
-                            Custom, high-performance websites — from concept to launch. Modern, fast, and built to convert.
-                        </p>
+                        <h3 class="ms-name">Product photos &amp; videos</h3>
+                        <p class="ms-problem"><span>The problem</span> Studio shoots are slow and expensive.</p>
+                        <p class="ms-desc">We make realistic photos and short videos of your product with AI, ready for your online store and your ads.</p>
                     </div>
                 </article>
                 <article class="ms-card">
                     <div class="ms-media">
-                        <img src="images/VISUAL%20IDENTITY.png" alt="Visual Identity">
+                        <img src="images/FASHION%20SHOOTING.png" alt="AI fashion photo of a model wearing a white tracksuit" loading="lazy">
                     </div>
                     <div class="ms-body">
                         <span class="ms-num">/ 02</span>
-                        <h3 class="ms-name">Visual Identity</h3>
-                        <p class="ms-desc">
-                            Logos, brand systems, and complete visual languages that make your brand unmistakable.
-                        </p>
+                        <h3 class="ms-name">Your clothes on models</h3>
+                        <p class="ms-problem"><span>The problem</span> Booking models and locations eats the budget.</p>
+                        <p class="ms-desc">We put your real pieces on AI models, anywhere you want them: a city street or a clean studio.</p>
+                    </div>
+                </article>
+                <article class="ms-card">
+                    <div class="ms-media">
+                        <img src="images/WEBSITE%20DESIGN.png" alt="Laptop showing a modern website design" loading="lazy">
+                    </div>
+                    <div class="ms-body">
+                        <span class="ms-num">/ 03</span>
+                        <h3 class="ms-name">Websites</h3>
+                        <p class="ms-problem"><span>The problem</span> Your site is outdated, slow, or doesn't exist yet.</p>
+                        <p class="ms-desc">We design and build a fast, modern site that works on phones and makes it easy to contact or buy from you.</p>
+                    </div>
+                </article>
+                <article class="ms-card">
+                    <div class="ms-media">
+                        <img src="images/VISUAL%20IDENTITY.png" alt="Business cards, brand guide and color swatches for a brand identity" loading="lazy">
+                    </div>
+                    <div class="ms-body">
+                        <span class="ms-num">/ 04</span>
+                        <h3 class="ms-name">Logo &amp; brand identity</h3>
+                        <p class="ms-problem"><span>The problem</span> Your logo, colors and posts don't feel like one brand.</p>
+                        <p class="ms-desc">We create your logo and a simple style guide, so everything you post looks like it came from the same place.</p>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- 4. TESTIMONIAL -->
-<section class="testimonial-section">
-        <div class="testimonial-inner-centered">
-            <div class="testimonial-header">
-                <h2 class="testimonial-title">What people say</h2>
-                <p class="testimonial-subtitle">
-                    Real feedback from brands launching faster, spending less, and keeping premium realism.
-                </p>
-            </div>
-
-            <div class="testimonial-grid-compact">
-                <div class="glass-card glass-card-compact">
-                    <div class="quote-symbol">“</div>
-                    <h3 class="quote-text quote-text-compact">
-                        Working with EAGLE completely changed the way we launch products. They helped us take a full drop
-                        from concept to launch in just a few days — something that would’ve taken weeks and a much bigger
-                        budget with traditional production.
-                    </h3>
-                    <div class="client-info">
-                        <span class="client-name">Timeless Fashion</span>
-                        <span class="client-role">Fashion &amp; Lifestyle Brand</span>
-                    </div>
-                </div>
-
-                <div class="glass-card glass-card-compact">
-                    <div class="quote-symbol">“</div>
-                    <h3 class="quote-text quote-text-compact">
-                        EAGLE saved us a ton of time. We couldn’t keep up producing content on our own, and other agencies
-                        took forever to deliver. With EAGLE, we got high-end visuals fast — without the usual delays.
-                    </h3>
-                    <div class="client-info">
-                        <span class="client-name">Lucas Grobe</span>
-                        <span class="client-role">Founder, Granno Coffee &amp; Milkshake Bar</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-</section>
-
     <!-- 5. WHY EAGLE (DIFERENCIAIS) -->
     <section id="why" class="why-section">
-        <div class="why-bg" aria-hidden="true">
-            <div class="why-media">
-                <video autoplay muted loop playsinline preload="metadata">
-                    <source src="videos/why-liquid.mp4" type="video/mp4">
-                </video>
-            </div>
-        </div>
-        <div class="left-content">
-            <span class="section-label">03 — The Revolution</span>
-            <h2 class="main-headline">Beyond Human<br>Constraints.</h2>
+        <div class="why-head">
+            <span class="section-label">04 — Why EAGLE</span>
+            <h2 class="main-headline">No studio.<br>No waiting.</h2>
             <p class="description">
-                EAGLE eliminates the friction of traditional production. We replace logistics,
-                casting, and physical limitations with infinite computational power.
+                A normal shoot needs models, a photographer, a location and weeks of editing.
+                We make the same kind of photos and videos with AI — in days, for a fraction of the cost.
             </p>
         </div>
-        <div class="right-content">
-            <div class="cards-wrapper">
-                <div class="diff-card">
-                    <span class="card-number">/ 01</span>
-                    <h3 class="card-title">Hyper-Efficiency</h3>
-                    <p class="card-desc">We compress weeks of production into days. No booking crews, no weather delays.</p>
-                </div>
-                <div class="diff-card">
-                    <span class="card-number">/ 02</span>
-                    <h3 class="card-title">Cost Disruption</h3>
-                    <p class="card-desc">Allocate your budget where it matters. Cut overhead by removing physical dependencies.</p>
-                </div>
-                <div class="diff-card">
-                    <span class="card-number">/ 03</span>
-                    <h3 class="card-title">Infinite Scale</h3>
-                    <p class="card-desc">Need 10 variations or 1,000? Our AI workflow maintains brand consistency across any volume.</p>
-                </div>
-                <div class="diff-card">
-                    <span class="card-number">/ 04</span>
-                    <h3 class="card-title">Aesthetic Precision</h3>
-                    <p class="card-desc">AI generated, human perfected. We ensure high-end fidelity and photorealistic details.</p>
-                </div>
+        <div class="why-grid">
+            <div class="diff-card">
+                <span class="card-number">1</span>
+                <h3 class="card-title">Ready in days</h3>
+                <p class="card-desc">No crew to book, no bad weather to wait out. You approve the idea, we start the same day.</p>
+            </div>
+            <div class="diff-card">
+                <span class="card-number">2</span>
+                <h3 class="card-title">Costs less</h3>
+                <p class="card-desc">You pay for the images — not for models, studio rental, travel and a full crew.</p>
+            </div>
+            <div class="diff-card">
+                <span class="card-number">3</span>
+                <h3 class="card-title">More versions</h3>
+                <p class="card-desc">Every ad and platform gets its own cut, and your product looks the same across all of them.</p>
+            </div>
+            <div class="diff-card">
+                <span class="card-number">4</span>
+                <h3 class="card-title">Checked by people</h3>
+                <p class="card-desc">AI makes the first draft. Our team fixes the details by hand before anything reaches you.</p>
             </div>
         </div>
     </section>
 
-    <!-- 6. PORTFOLIO -->
-   <section id="portfolio" class="portfolio-section">
-    <div class="portfolio-inner">
-        <div class="portfolio-header">
-            <span class="section-label">04 — Portfolio</span>
-            <h2 class="portfolio-title">Selected Work</h2>
-        </div>
-        <div class="portfolio-grid">
-            <!-- FIRST CARD -->
-            <a href="https://www.behance.net/gallery/239638447/TIMELESS-FASHION"
-               target="_blank"
-               class="portfolio-card">
-                <div class="portfolio-thumb">
-                    <video autoplay muted loop playsinline preload="metadata" aria-label="Timeless Fashion - Drop 01">
-                    <source src="videos/TIMELESS%20FASHION%20-%20selected%20work%20video.mp4" type="video/mp4">
-                </video>
-                </div>
-                <div class="portfolio-meta">
-                    <span class="portfolio-tag">Fashion</span>
-                    <h3 class="portfolio-name">Timeless Fashion - Drop 01</h3>
-                </div>
-            </a>
-
-            <!-- SECOND CARD (SUPREMACY) - ATUALIZADO -->
-            <a href="https://www.behance.net/gallery/239595839/Supremacy-Collectors-Edition" target="_blank"
-               class="portfolio-card">
-                <div class="portfolio-thumb">
-                    <video autoplay muted loop playsinline preload="metadata" aria-label="Fragrance Product Still">
-                    <source src="videos/SUPREMACY%20-%20selected%20work%20video.mp4" type="video/mp4">
-                </video>
-                </div>
-                <div class="portfolio-meta">
-                    <span class="portfolio-tag">Product</span>
-                    <h3 class="portfolio-name">Supremacy Collector's Edition</h3>
-                </div>
-            </a>
-
-            <!-- THIRD CARD -->
-            <a href="https://www.behance.net/gallery/241321895/GRANNO-Social-Media-Campaign"
-               target="_blank"
-               class="portfolio-card">
-                <div class="portfolio-thumb">
-                    <video autoplay muted loop playsinline preload="metadata" aria-label="Granno Coffee Bar">
-                    <source src="videos/GRANNO%20selected%20work%20video.mp4" type="video/mp4">
-                </video>
-                </div>
-                <div class="portfolio-meta">
-                    <span class="portfolio-tag">Branded Content</span>
-                    <h3 class="portfolio-name">Granno Coffee Bar</h3>
-                </div>
-            </a>
-        </div>
-        <div class="portfolio-cta">
-            <a href="https://www.behance.net/eagleai" target="_blank" class="portfolio-btn">View Full Portfolio</a>
-        </div>
-    </div>
-</section>
-
-    <!-- 7. FOOTER -->
+    <!-- 6. FOOTER -->
     <footer id="contact">
-        <div class="cta-inner">
+        <div class="footer-bg" aria-hidden="true">
+            <video autoplay muted loop playsinline preload="metadata" src="videos/footer-bg.mp4"></video>
+        </div>
+        <div class="footer-spinner" aria-hidden="true">
+            <svg class="circular-text" viewBox="0 0 100 100">
+                <path id="circle-footer" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                <text font-size="9" fill="white" font-weight="bold" letter-spacing="0.9">
+                    <textPath href="#circle-footer" textLength="232" lengthAdjust="spacing">EAGLE AI AGENCY • FASTER &amp; SMARTER • </textPath>
+                </text>
+            </svg>
+        </div>
+        <div class="contact-wrap">
+            <div class="contact-main">
             <div class="cta-label">05 — Let’s talk</div>
             <h2 class="footer-title">READY TO FLY?</h2>
             <p class="cta-subtitle">
-                Start a WhatsApp thread with our team and get a tailored concept, pricing and production roadmap in minutes.
+                Tell us what you sell and what you need. We'll reply on WhatsApp with ideas and a price.
             </p>
-        <div class="cta-buttons">
-            <a href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0"
-               target="_blank"
-               class="cta-btn cta-btn-whatsapp">
-                Start via WhatsApp
-            </a>
-            <a href="https://www.instagram.com/eagle__ai"
-               target="_blank"
-               class="portfolio-btn cta-btn-instagram">
-                Visit our Instagram
-            </a>
-        </div>
+
+            <ul class="contact-lines">
+                <li><span>Phone</span><a href="tel:+14076137402">+1 (407) 613-7402</a></li>
+                <li><span>Instagram</span><a href="https://www.instagram.com/eagle__ai" target="_blank" rel="noopener">@eagle__ai</a></li>
+                <li><span>Email</span><a href="mailto:contact.eagleai@gmail.com">contact.eagleai@gmail.com</a></li>
+            </ul>
+
+            <div class="contact-actions">
+                <a class="wa-btn"
+                   href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0"
+                   target="_blank" rel="noopener">
+                    <span class="wa-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                    </span>
+                    Chat on WhatsApp
+                </a>
+            </div>
+            </div>
         </div>
         <div class="footer-bottom">
-            <div>&copy; 2025 EAGLE AI AGENCY LLC.</div>
-            <div>Based in Orlando, Florida USA.</div>
+            <div>&copy; <span id="footerYear">2026</span> AGUIAR GENERAL SERVICES LLC</div>
+            <div>Based in Orlando, Florida, USA</div>
         </div>
     </footer>
+
+    <!-- PROJECT DRAWER (filled from the <template> matching the clicked card) -->
+    <div class="project-drawer" id="projectDrawer" aria-hidden="true">
+        <div class="pd-backdrop" data-close></div>
+        <aside class="pd-panel" role="dialog" aria-modal="true" aria-labelledby="pdTitle" tabindex="-1">
+            <div class="pd-topbar">
+                <button type="button" class="pd-close" aria-label="Close project" data-close>&times;</button>
+            </div>
+            <div class="pd-content" id="pdContent"></div>
+        </aside>
+    </div>
+
+    <template id="project-timeless">
+        <div class="pd-head">
+            <span class="pd-eyebrow">Client project · Clothing brand</span>
+            <h2 class="pd-title" id="pdTitle">Timeless Fashion — Drop 01</h2>
+            <p class="pd-lead">
+                A new streetwear drop needed launch photos and videos. We made all of them with AI, from simple product mockups.
+            </p>
+        </div>
+        <div class="pd-facts">
+            <div class="pd-fact">
+                <span>What they needed</span>
+                <p>Shooting the drop the usual way (models, a photographer, locations) would have taken weeks and a big part of the budget.</p>
+            </div>
+            <div class="pd-fact">
+                <span>What we made</span>
+                <p>The shirts and the cap on models in the city at night, on a golf course, in a garden and in a studio. Same shirts, same prints, no photoshoot.</p>
+            </div>
+            <div class="pd-fact">
+                <span>Delivered</span>
+                <p>9 campaign images<br>4 short videos for social media</p>
+            </div>
+        </div>
+        <blockquote class="pd-quote">
+            <p>“Working with EAGLE completely changed the way we launch products. They helped us take a full drop from concept to launch in just a few days — something that would’ve taken weeks and a much bigger budget with traditional production.”</p>
+            <cite>Timeless Fashion · Fashion &amp; Lifestyle Brand</cite>
+        </blockquote>
+        <div class="pd-gallery">
+            <img src="images/work/timeless/timeless-01.webp" width="1400" height="1738" loading="lazy" alt="Model walking down a city street at night in the Timeless graphic tee and baggy jeans">
+            <video src="videos/work/timeless-01.mp4" width="576" height="716" autoplay muted loop playsinline preload="metadata" aria-label="Timeless campaign video 1"></video>
+            <img src="images/work/timeless/timeless-02.webp" width="1400" height="1738" loading="lazy" alt="Model walking across a golf course in the Timeless tee and a white beanie">
+            <img src="images/work/timeless/timeless-03.webp" width="896" height="1152" loading="lazy" alt="Woman walking through a city garden in the Timeless tee, seen from behind">
+            <video src="videos/work/timeless-02.mp4" width="844" height="576" autoplay muted loop playsinline preload="metadata" aria-label="Timeless campaign video 2"></video>
+            <img src="images/work/timeless/timeless-04.webp" width="768" height="1344" loading="lazy" alt="Hand holding the Timeless cap out toward the camera">
+            <img src="images/work/timeless/timeless-05.webp" width="1400" height="958" loading="lazy" alt="Model sitting in a dark studio, showing the back print of the black Timeless tee">
+            <video src="videos/work/timeless-03.mp4" width="576" height="742" autoplay muted loop playsinline preload="metadata" aria-label="Timeless campaign video 3"></video>
+            <video src="videos/work/timeless-04.mp4" width="576" height="1006" autoplay muted loop playsinline preload="metadata" aria-label="Timeless campaign video 4"></video>
+            <img src="images/work/timeless/timeless-06.webp" width="1024" height="1024" loading="lazy" alt="Product mockup of the white Timeless tee, front">
+            <img src="images/work/timeless/timeless-07.webp" width="1024" height="1024" loading="lazy" alt="Product mockup of the white Timeless tee, back print">
+            <img src="images/work/timeless/timeless-08.webp" width="1400" height="1400" loading="lazy" alt="Product mockup of the black Timeless tee, front">
+            <img src="images/work/timeless/timeless-09.webp" width="1400" height="1400" loading="lazy" alt="Product mockup of the black Timeless tee, back print">
+        </div>
+        <div class="pd-cta">
+            <p>Launching a collection? We can do the same for yours.</p>
+            <a href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" class="cta-btn">Message us on WhatsApp</a>
+        </div>
+    </template>
+
+    <template id="project-vs">
+        <div class="pd-head">
+            <span class="pd-eyebrow">Local business · Barbershop</span>
+            <h2 class="pd-title" id="pdTitle">V's Barbershop — O-Town West</h2>
+            <p class="pd-lead">
+                Instagram content and videos for a barbershop in Orlando, made with AI but built on the shop's real look: the real uniform, the real products, the real storefront.
+            </p>
+        </div>
+        <div class="pd-facts">
+            <div class="pd-fact">
+                <span>What they needed</span>
+                <p>Regular posts showing the cuts, the shaves and the products, without pulling a barber off the chair for a photo shoot.</p>
+            </div>
+            <div class="pd-fact">
+                <span>What we made</span>
+                <p>Feed posts with prices and offers, stories made to get replies (a poll, open chairs, product of the week), a short reel and a video-game style commercial. The text is added by us, not by AI, so prices and the address are always right.</p>
+            </div>
+            <div class="pd-fact">
+                <span>Delivered</span>
+                <p>4 feed posts<br>4 stories<br>1 reel · 1 commercial</p>
+            </div>
+        </div>
+        <div class="pd-gallery">
+            <video src="videos/work/vs-brand-film.mp4" width="720" height="1280" controls playsinline preload="metadata" poster="images/work/vs/poster-film.jpg" aria-label="V's Barbershop video-game style commercial, with sound"></video>
+            <video src="videos/work/vs-reel-showcase.mp4" width="720" height="1280" controls playsinline preload="metadata" poster="images/work/vs/poster-reel.jpg" aria-label="V's Barbershop showcase reel, with sound"></video>
+            <img src="images/work/vs/post-01-fade.jpg" width="1080" height="1350" loading="lazy" alt="Feed post: skin fade for $42, with a barber working the clippers">
+            <img src="images/work/vs/post-02-shave.jpg" width="1080" height="1350" loading="lazy" alt="Feed post: hot towel and straight razor shave for $45">
+            <img src="images/work/vs/post-03-tonic.jpg" width="1080" height="1350" loading="lazy" alt="Feed post: the two-step shave cream and V's tonic">
+            <img src="images/work/vs/post-04-proof.jpg" width="1080" height="1350" loading="lazy" alt="Feed post: 4.9 stars from 702 Google reviews over the shop's storefront">
+            <img src="images/work/vs/story-s1-cadeiras.jpg" width="810" height="1440" loading="lazy" alt="Story: open chairs right now, with an empty barber chair">
+            <img src="images/work/vs/story-s2-enquete.jpg" width="810" height="1440" loading="lazy" alt="Story poll: skin fade or scissor cut?">
+            <img src="images/work/vs/story-s3-tonic.jpg" width="810" height="1440" loading="lazy" alt="Story: product of the week, V's tonic held in hand">
+            <img src="images/work/vs/story-s4-agenda.jpg" width="810" height="1440" loading="lazy" alt="Story: last chairs this week, storefront at dusk">
+            <img src="images/work/vs/frame-04-razor.jpg" width="900" height="1612" loading="lazy" alt="Barber shaving a client's cheek with a straight razor">
+            <img src="images/work/vs/frame-06-reveal.jpg" width="900" height="1612" loading="lazy" alt="Client checking his new cut in the mirror">
+            <img src="images/work/vs/frame-07-overhead.jpg" width="900" height="1612" loading="lazy" alt="Overhead view of a client in the barber chair on the checkered floor">
+            <img src="images/work/vs/frame-08-pov-tesoura.jpg" width="900" height="1612" loading="lazy" alt="Scissor cut seen from the barber's point of view">
+            <img src="images/work/vs/frame-09-maquina-fade.jpg" width="900" height="1612" loading="lazy" alt="Close-up of a fade being cut with clippers">
+        </div>
+        <div class="pd-cta">
+            <p>Run a local business? We can keep your Instagram posting like this.</p>
+            <a href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" class="cta-btn">Message us on WhatsApp</a>
+        </div>
+    </template>
+
+    <template id="project-supremacy">
+        <div class="pd-head">
+            <span class="pd-eyebrow">Concept project · Perfume</span>
+            <h2 class="pd-title" id="pdTitle">Supremacy Collector's Edition</h2>
+            <p class="pd-lead">
+                A luxury perfume ad, made entirely with AI and finished by hand in Photoshop.
+            </p>
+        </div>
+        <div class="pd-facts">
+            <div class="pd-fact">
+                <span>Why we made it</span>
+                <p>This one wasn't for a client. We picked a real product, Afnan's Supremacy Collector's Edition, to see how far we could take a high-end campaign with AI alone.</p>
+            </div>
+            <div class="pd-fact">
+                <span>What we made</span>
+                <p>A model with the bottle and water on his skin under hard studio light, a close-up of the bottle in his hand, a product shot of the bottle alone, and a short video.</p>
+            </div>
+            <div class="pd-fact">
+                <span>Delivered</span>
+                <p>4 campaign images<br>1 short video</p>
+            </div>
+        </div>
+        <p class="pd-note">Concept work. Not commissioned by or affiliated with Afnan Perfumes.</p>
+        <div class="pd-gallery">
+            <img src="images/work/supremacy/supremacy-01.webp" width="1400" height="1738" loading="lazy" alt="Model spraying the Supremacy perfume under a hard studio light">
+            <video src="videos/work/supremacy-01.mp4" width="576" height="714" autoplay muted loop playsinline preload="metadata" aria-label="Supremacy campaign video"></video>
+            <img src="images/work/supremacy/supremacy-02.webp" width="1400" height="1738" loading="lazy" alt="Model with water on his skin holding the Supremacy bottle">
+            <img src="images/work/supremacy/supremacy-03.webp" width="1400" height="1738" loading="lazy" alt="Close-up of a hand holding the Supremacy Collector's Edition bottle near the model's face">
+            <img src="images/work/supremacy/supremacy-04.webp" width="1400" height="1738" loading="lazy" alt="The Supremacy Collector's Edition bottle alone under a beam of warm light">
+        </div>
+        <div class="pd-cta">
+            <p>Sell a physical product? This is the kind of ad we can make for it.</p>
+            <a href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" class="cta-btn">Message us on WhatsApp</a>
+        </div>
+    </template>
 
     <!-- SCRIPT -->
     <script>
@@ -1976,7 +2443,7 @@ header > *{
             lastScrollY = currentY;
         });
 
-        // Scroll reveal (Hero + WHY US + Testimonial + Portfolio) com reverso ao subir
+        // Scroll reveal (Hero + Our Work + WHY US) com reverso ao subir
         const observerOptions = { threshold: 0.25 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -2004,9 +2471,7 @@ header > *{
         document.querySelectorAll('.hero-line').forEach(line => observer.observe(line));
         // WHY US cards
         document.querySelectorAll('.diff-card').forEach(card => observer.observe(card));
-        // Testimonial
-        document.querySelectorAll('.glass-card').forEach(card => observer.observe(card));
-        // Portfolio cards scroll reveal
+        // Our Work cards scroll reveal
         document.querySelectorAll('.portfolio-card').forEach((card, index) => {
             observer.observe(card);
             card.style.transitionDelay = (0.05 * index) + 's';
@@ -2030,6 +2495,7 @@ header > *{
 
             targets.forEach(el => {
                 el.addEventListener('mouseenter', () => {
+                    cursor.textContent = el.dataset.cursor || 'Click here';
                     cursor.classList.add('visible');
                 });
                 el.addEventListener('mouseleave', () => {
@@ -2146,90 +2612,85 @@ header > *{
             init();
         })();
 
-        // --- LIQUID BACKGROUND (Canvas 2D, Reusable) ---
-        function initLiquidBackground(id){
-            const c = document.getElementById(id);
-            if(!c || !c.getContext) return;
-            const ctx = c.getContext("2d");
-            let w, h, dpr = window.devicePixelRatio || 1;
-            let blobs = [];
+        // --- OUR WORK: project drawer (content comes from <template id="project-..."> ) ---
+        (function(){
+            const drawer = document.getElementById('projectDrawer');
+            if(!drawer) return;
+            const panel = drawer.querySelector('.pd-panel');
+            const content = document.getElementById('pdContent');
+            let lastFocus = null;
+            let clearTimer = null;
 
-            function resize(){
-                const r = c.getBoundingClientRect();
-                w = r.width;
-                h = r.height;
-                c.width = w * dpr;
-                c.height = h * dpr;
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            function openProject(id, trigger){
+                const tpl = document.getElementById('project-' + id);
+                if(!tpl) return;
+                clearTimeout(clearTimer);
+                content.replaceChildren(tpl.content.cloneNode(true));
+                lastFocus = trigger || document.activeElement;
+                drawer.classList.add('open');
+                drawer.setAttribute('aria-hidden', 'false');
+                document.documentElement.classList.add('pd-lock');
+                panel.scrollTop = 0;
+                panel.focus({ preventScroll: true });
             }
 
-            function create(){
-                blobs = [];
-                const base = Math.max(w, h);
-                for(let i = 0; i < 6; i++){
-                    const r = base * (0.18 + Math.random() * 0.12);
-                    blobs.push({
-                        x: Math.random() * w,
-                        y: Math.random() * h,
-                        r,
-                        vx: (Math.random() * 0.6 + 0.2) * (Math.random() < 0.5 ? -1 : 1),
-                        vy: (Math.random() * 0.6 + 0.2) * (Math.random() < 0.5 ? -1 : 1),
-                        alpha: 0.22 + Math.random() * 0.15
-                    });
-                }
+            function closeProject(){
+                if(!drawer.classList.contains('open')) return;
+                drawer.classList.remove('open');
+                drawer.setAttribute('aria-hidden', 'true');
+                document.documentElement.classList.remove('pd-lock');
+                content.querySelectorAll('video').forEach(v => v.pause());
+                // empty after the slide-out so the videos stop downloading
+                clearTimer = setTimeout(() => content.replaceChildren(), 650);
+                if(lastFocus) lastFocus.focus({ preventScroll: true });
             }
 
-            function update(){
-                for(const b of blobs){
-                    b.x += b.vx;
-                    b.y += b.vy;
-                    if (b.x - b.r > w) b.x = -b.r;
-                    if (b.x + b.r < 0) b.x = w + b.r;
-                    if (b.y - b.r > h) b.y = -b.r;
-                    if (b.y + b.r < 0) b.y = h + b.r;
-                }
-            }
-
-            function draw(){
-                ctx.clearRect(0, 0, w, h);
-                const g = ctx.createLinearGradient(0, 0, w, h);
-                g.addColorStop(0, "#020207");
-                g.addColorStop(1, "#050509");
-                ctx.fillStyle = g;
-                ctx.fillRect(0, 0, w, h);
-
-                ctx.globalCompositeOperation = "lighter";
-                for(const b of blobs){
-                    const rg = ctx.createRadialGradient(b.x, b.y, b.r * 0.1, b.x, b.y, b.r);
-                    rg.addColorStop(0, `rgba(180, 180, 255, ${b.alpha})`);
-                    rg.addColorStop(0.4, `rgba(90, 90, 140, ${b.alpha * 0.9})`);
-                    rg.addColorStop(1, "rgba(0, 0, 0, 0)");
-                    ctx.fillStyle = rg;
-                    ctx.beginPath();
-                    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.globalCompositeOperation = "source-over";
-            }
-
-            function loop(){
-                update();
-                draw();
-                requestAnimationFrame(loop);
-            }
-
-            resize();
-            create();
-            loop();
-            window.addEventListener("resize", () => {
-                resize();
-                create();
+            document.querySelectorAll('[data-project]').forEach(card => {
+                card.addEventListener('click', () => openProject(card.dataset.project, card));
             });
-        }
+            drawer.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeProject));
 
-        // Init the testimonial canvas
-        initLiquidBackground("testimonialCanvas");
+            document.addEventListener('keydown', (e) => {
+                if(!drawer.classList.contains('open')) return;
+                if(e.key === 'Escape'){ closeProject(); return; }
+                if(e.key !== 'Tab') return;
+                const focusable = panel.querySelectorAll('a[href], button:not([disabled])');
+                if(!focusable.length) return;
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if(e.shiftKey && (document.activeElement === first || document.activeElement === panel)){
+                    e.preventDefault(); last.focus();
+                } else if(!e.shiftKey && document.activeElement === last){
+                    e.preventDefault(); first.focus();
+                }
+            });
+        })();
     
+        // Loading screen: hide on window load, but not before the ~1.8s progress bar fills; max 4s so it never blocks
+        (function(){
+            const loader = document.getElementById('siteLoader');
+            if (!loader) return;
+            let done = false;
+            function hide(){
+                if (done) return;
+                done = true;
+                const wait = Math.max(0, 1950 - performance.now());
+                setTimeout(() => {
+                    loader.classList.add('is-done');
+                    setTimeout(() => loader.remove(), 700);
+                }, wait);
+            }
+            if (document.readyState === 'complete') hide();
+            else window.addEventListener('load', hide, { once: true });
+            setTimeout(hide, 4000);
+        })();
+
+        // Footer copyright year
+        (function(){
+            const y = document.getElementById('footerYear');
+            if (y) y.textContent = new Date().getFullYear();
+        })();
+
         // --- HEADER: blur ribbon on scroll ---
         (function(){
             const header = document.querySelector('header');
