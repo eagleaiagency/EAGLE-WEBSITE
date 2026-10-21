@@ -1089,6 +1089,104 @@
             .site-loader { transition: none; }
         }
 
+        /* --- PRICING --- */
+        .pricing-section {
+            background: #050505;
+            color: #fff;
+            padding: clamp(64px, 8vw, 110px) clamp(20px, 6vw, 50px);
+        }
+        .pricing-inner { max-width: 1180px; margin: 0 auto; }
+        .pricing-head { text-align: center; margin-bottom: clamp(36px, 5vw, 56px); }
+        .pricing-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin: 0 0 14px;
+        }
+        .pricing-sub {
+            color: #b5b0a8;
+            max-width: 54ch;
+            margin: 0 auto;
+            font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+            line-height: 1.5;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: clamp(14px, 1.6vw, 20px);
+            align-items: stretch;
+        }
+        .price-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: clamp(24px, 2vw, 30px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 18px;
+            background: rgba(255,255,255,0.02);
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+        }
+        .price-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.22); }
+        .price-card.featured {
+            border-color: rgba(255,255,255,0.55);
+            background: rgba(255,255,255,0.06);
+        }
+        .price-badge {
+            align-self: flex-start;
+            font-size: 0.6rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #0a0a0a;
+            background: #fff;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-weight: 600;
+        }
+        .price-name { font-size: 1.15rem; font-weight: 600; margin: 0; }
+        .price-scope {
+            font-size: 0.72rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            margin: 0;
+        }
+        .price-amount { font-size: 1.9rem; font-weight: 600; margin: 6px 0 2px; }
+        .price-amount span { font-size: 0.78rem; font-weight: 400; color: rgba(255,255,255,0.5); }
+        .price-desc {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.62);
+            margin: 0;
+            flex-grow: 1;
+        }
+        .price-cta {
+            margin-top: 6px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .price-card.featured .price-cta { background: #fff; color: #0a0a0a; border-color: #fff; }
+        .price-cta:hover { background: #fff; color: #0a0a0a; border-color: #fff; }
+        .pricing-note {
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            margin-top: clamp(24px, 3vw, 34px);
+        }
+        @media (max-width: 980px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+
         /* --- FOOTER / CTA --- */
         footer {
             position: relative;
@@ -2048,7 +2146,8 @@ header > *{
             <a href="#work" class="nav-item" onclick="toggleMenu()"><span class="nav-number">02</span> OUR WORK</a>
             <a href="#services" class="nav-item" onclick="toggleMenu()"><span class="nav-number">03</span> SERVICES</a>
             <a href="#why" class="nav-item" onclick="toggleMenu()"><span class="nav-number">04</span> WHY US</a>
-            <a href="#contact" class="nav-item" onclick="toggleMenu()"><span class="nav-number">05</span> CONTACT</a>
+            <a href="#pricing" class="nav-item" onclick="toggleMenu()"><span class="nav-number">05</span> PRICING</a>
+            <a href="#contact" class="nav-item" onclick="toggleMenu()"><span class="nav-number">06</span> CONTACT</a>
         </div>
         <div class="menu-footer">
             <div class="menu-spinner">
@@ -2069,8 +2168,8 @@ header > *{
     </video>
     <canvas id="heroCanvas" class="hero-canvas"></canvas>
         <div class="hero-text-layer text-top">
-            <div class="huge-text hero-line hero-line-1">Professional</div>
-            <div class="huge-text huge-offset hero-line hero-line-2">Content</div>
+            <div class="huge-text hero-line hero-line-1">Agency</div>
+            <div class="huge-text huge-offset hero-line hero-line-2">quality.</div>
         </div>
         <div class="hero-spinner-container">
             <svg class="circular-text" viewBox="0 0 100 100">
@@ -2081,10 +2180,10 @@ header > *{
             </svg>
         </div>
         <div class="hero-text-layer text-bottom">
-            <div class="huge-text hero-line hero-line-3">Real &</div>
-            <div class="huge-text hero-line hero-line-4">Surreal</div>
+            <div class="huge-text hero-line hero-line-3">No studio.</div>
+            <div class="huge-text hero-line hero-line-4">No shipping.</div>
             <p class="hero-sub hero-line hero-line-5">
-                Photos and videos for your brand, made with AI. No photoshoot needed.
+                Studio-grade content, campaigns and brand identity for food &amp; beverage brands — fully remote, delivered in days, not weeks.
             </p>
         </div>
     </section>
@@ -2149,55 +2248,55 @@ header > *{
     <section id="services" class="more-services">
         <div class="ms-inner">
             <div class="ms-header">
-                <span class="section-label">03 — What we make</span>
-                <h2 class="ms-title">What we can make for you</h2>
+                <span class="section-label">03 — What we deliver</span>
+                <h2 class="ms-title">What we deliver</h2>
                 <p class="ms-subtitle">
-                    Start with the problem you have. Here's how we solve it.
+                    From a single product photo to a whole brand. Pick what you need.
                 </p>
             </div>
             <div class="ms-grid">
                 <article class="ms-card">
                     <div class="ms-media">
-                        <img src="images/PRODUCT%20STILL.png" alt="AI product photo of an energy drink can surrounded by splashing liquid" loading="lazy">
+                        <img src="images/PRODUCT%20STILL.png" alt="AI product photo of a drink can surrounded by splashing liquid" loading="lazy">
                     </div>
                     <div class="ms-body">
                         <span class="ms-num">/ 01</span>
-                        <h3 class="ms-name">Product photos &amp; videos</h3>
-                        <p class="ms-problem"><span>The problem</span> Studio shoots are slow and expensive.</p>
-                        <p class="ms-desc">We make realistic photos and short videos of your product with AI, ready for your online store and your ads.</p>
+                        <h3 class="ms-name">Content Engine</h3>
+                        <p class="ms-problem"><span>The problem</span> Product shoots are slow, pricey, and never enough.</p>
+                        <p class="ms-desc">A month of scroll-stopping posts and reels of your product — studio quality, ready to post, on tap.</p>
                     </div>
                 </article>
                 <article class="ms-card">
                     <div class="ms-media">
-                        <img src="images/FASHION%20SHOOTING.png" alt="AI fashion photo of a model wearing a white tracksuit" loading="lazy">
+                        <img src="images/FASHION%20SHOOTING.png" alt="AI campaign visual for a consumer product" loading="lazy">
                     </div>
                     <div class="ms-body">
                         <span class="ms-num">/ 02</span>
-                        <h3 class="ms-name">Your clothes on models</h3>
-                        <p class="ms-problem"><span>The problem</span> Booking models and locations eats the budget.</p>
-                        <p class="ms-desc">We put your real pieces on AI models, anywhere you want them: a city street or a clean studio.</p>
+                        <h3 class="ms-name">Campaigns</h3>
+                        <p class="ms-problem"><span>The problem</span> Your ads blend in and don't convert.</p>
+                        <p class="ms-desc">Launch-ready ad creative built to stop the scroll and actually sell, made to fit each platform.</p>
                     </div>
                 </article>
                 <article class="ms-card">
                     <div class="ms-media">
-                        <img src="images/WEBSITE%20DESIGN.png" alt="Laptop showing a modern website design" loading="lazy">
+                        <img src="images/VISUAL%20IDENTITY.png" alt="Logo, color palette and type for a brand identity" loading="lazy">
                     </div>
                     <div class="ms-body">
                         <span class="ms-num">/ 03</span>
-                        <h3 class="ms-name">Websites</h3>
-                        <p class="ms-problem"><span>The problem</span> Your site is outdated, slow, or doesn't exist yet.</p>
-                        <p class="ms-desc">We design and build a fast, modern site that works on phones and makes it easy to contact or buy from you.</p>
+                        <h3 class="ms-name">Brand Identity</h3>
+                        <p class="ms-problem"><span>The problem</span> Your logo, colors and feed don't feel like one brand.</p>
+                        <p class="ms-desc">Logo, palette, typography — the whole brand world, so everything looks like it came from the same place.</p>
                     </div>
                 </article>
                 <article class="ms-card">
                     <div class="ms-media">
-                        <img src="images/VISUAL%20IDENTITY.png" alt="Business cards, brand guide and color swatches for a brand identity" loading="lazy">
+                        <img src="images/WEBSITE%20DESIGN.png" alt="Laptop showing a modern online store" loading="lazy">
                     </div>
                     <div class="ms-body">
                         <span class="ms-num">/ 04</span>
-                        <h3 class="ms-name">Logo &amp; brand identity</h3>
-                        <p class="ms-problem"><span>The problem</span> Your logo, colors and posts don't feel like one brand.</p>
-                        <p class="ms-desc">We create your logo and a simple style guide, so everything you post looks like it came from the same place.</p>
+                        <h3 class="ms-name">Websites</h3>
+                        <p class="ms-problem"><span>The problem</span> Your store doesn't look as good as the product inside it.</p>
+                        <p class="ms-desc">A fast, modern storefront that works on phones and makes buying effortless.</p>
                     </div>
                 </article>
             </div>
@@ -2208,10 +2307,11 @@ header > *{
     <section id="why" class="why-section">
         <div class="why-head">
             <span class="section-label">04 — Why EAGLE</span>
-            <h2 class="main-headline">No studio.<br>No waiting.</h2>
+            <h2 class="main-headline">Agency craft.<br>Without the wait.</h2>
             <p class="description">
-                A normal shoot needs models, a photographer, a location and weeks of editing.
-                We make the same kind of photos and videos with AI — in days, for a fraction of the cost.
+                A normal product shoot means a studio, props and weeks of editing.
+                We make the same scroll-stopping content with AI — directed by people,
+                delivered in days, for a fraction of the cost.
             </p>
         </div>
         <div class="why-grid">
@@ -2238,6 +2338,51 @@ header > *{
         </div>
     </section>
 
+    <!-- 5.5 PRICING -->
+    <section id="pricing" class="pricing-section">
+        <div class="pricing-inner">
+            <div class="pricing-head">
+                <span class="section-label">05 — Pricing</span>
+                <h2 class="pricing-title">Simple, flat pricing</h2>
+                <p class="pricing-sub">
+                    Agency quality without the agency bill. Pick a plan, send your product photos, and we start.
+                </p>
+            </div>
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <h3 class="price-name">Content Engine</h3>
+                    <p class="price-scope">12–16 pieces / month</p>
+                    <p class="price-amount">from $800<span> / mo</span></p>
+                    <p class="price-desc">Studio-quality posts and reels of your product every month, ready to post.</p>
+                    <a class="price-cta" href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Start</a>
+                </div>
+                <div class="price-card featured">
+                    <span class="price-badge">Most popular</span>
+                    <h3 class="price-name">Full Management</h3>
+                    <p class="price-scope">Content + IG managed</p>
+                    <p class="price-amount">from $1,500<span> / mo</span></p>
+                    <p class="price-desc">We create and run your whole feed: calendar, captions, stories and replies.</p>
+                    <a class="price-cta" href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Start</a>
+                </div>
+                <div class="price-card">
+                    <h3 class="price-name">Brand Sprint</h3>
+                    <p class="price-scope">Identity + campaign + site</p>
+                    <p class="price-amount">from $2,500<span> / project</span></p>
+                    <p class="price-desc">A whole brand world — logo, identity, launch campaign and a site — in one focused sprint.</p>
+                    <a class="price-cta" href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Start</a>
+                </div>
+                <div class="price-card">
+                    <h3 class="price-name">Single / test</h3>
+                    <p class="price-scope">One ad or spec set</p>
+                    <p class="price-amount">from $45<span> / piece</span></p>
+                    <p class="price-desc">One piece to see the quality for yourself, with no commitment.</p>
+                    <a class="price-cta" href="https://api.whatsapp.com/send/?phone=4076137402&text&type=phone_number&app_absent=0" target="_blank" rel="noopener">Start</a>
+                </div>
+            </div>
+            <p class="pricing-note">Starting points — your final quote depends on your product and scope.</p>
+        </div>
+    </section>
+
     <!-- 6. FOOTER -->
     <footer id="contact">
         <div class="footer-bg" aria-hidden="true">
@@ -2253,10 +2398,10 @@ header > *{
         </div>
         <div class="contact-wrap">
             <div class="contact-main">
-            <div class="cta-label">05 — Let’s talk</div>
+            <div class="cta-label">06 — Let’s talk</div>
             <h2 class="footer-title">READY TO FLY?</h2>
             <p class="cta-subtitle">
-                Tell us what you sell and what you need. We'll reply on WhatsApp with ideas and a price.
+                Send us a photo of your product and we'll send back a free sample — studio-quality, no shoot, no shipping.
             </p>
 
             <ul class="contact-lines">
